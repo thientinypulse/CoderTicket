@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'venues/new'
+
+  post 'venues/create'
+
   devise_for :users
   root 'events#index'
 

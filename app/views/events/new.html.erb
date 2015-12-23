@@ -1,0 +1,40 @@
+<div class="container-fluid no-pad events-detail">
+  
+  <div class="row no-pad">
+    
+    <div class="col-md-9 event-content">
+
+    <div class='page-header'>
+      <h1>Create new event</h1>
+    </div>
+
+<%= form_for(@event, url: events_path) do |f| %>
+
+<%= f.label :starts_at %><br/>
+<%= f.datetime_local_field(:starts_at, min: Date.today) %><br/>
+
+<%= f.label :ends_at %><br/>
+<%= f.datetime_local_field(:ends_at, min: Date.today) %><br/>
+<% venues = Venue.all.map{|e| [e.name, e.id]} %>
+<%= f.label :venue %><br/>
+<%=  f.select(:venue_id, venues, {:include_blank => 'Select Venue'}) %><br/>
+
+<% categories = Category.all.map{|e| [e.name, e.id]} %>
+<%= f.label :category %><br/>
+<%=  f.select(:category_id, categories, {:include_blank => 'Select Category'}) %><br/>
+
+<%= f.label :name %><br/>
+<%= f.text_field :name %><br/>
+
+<%= f.label :hero_image_url %><br/>
+<%= f.text_field :hero_image_url %><br/>
+
+<%= f.label :extended_html_description %><br/>
+<%= f.text_area :extended_html_description, cols: 60, rows: 5 %><br/>
+
+<%= f.submit 'New Event', class: 'btn btn-primary' %>
+<% end %>
+
+    </div>
+  </div>
+</div>

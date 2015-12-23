@@ -1,0 +1,16 @@
+<%= form_for(@venue, url: venues_create_path) do |f| %>
+ 
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+ 
+  <%= f.label :full_address %>
+  <%= f.text_field :full_address %>
+
+  <% regions = Region.all.map{|e| [e.name, e.id]} %>
+ <!--  <%= f.label :region %> -->
+<!--   <%= select_tag(:region, options_for_select(regions)) %> -->
+ 
+  <%=  f.select(:region_id, regions, {:include_blank => 'Select Region'}) %>
+  <%= f.submit 'Add Venue' %>
+ 
+<% end %>
