@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223010221) do
+ActiveRecord::Schema.define(version: 20151223172011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,16 @@ ActiveRecord::Schema.define(version: 20151223010221) do
 
   add_index "events", ["category_id"], name: "index_events_on_category_id", using: :btree
   add_index "events", ["venue_id"], name: "index_events_on_venue_id", using: :btree
+
+  create_table "my_events", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "my_events", ["event_id"], name: "index_my_events_on_event_id", using: :btree
+  add_index "my_events", ["user_id"], name: "index_my_events_on_user_id", using: :btree
 
   create_table "regions", force: :cascade do |t|
     t.string   "name"
@@ -100,6 +110,8 @@ ActiveRecord::Schema.define(version: 20151223010221) do
   add_foreign_key "book_tickets", "users"
   add_foreign_key "events", "categories"
   add_foreign_key "events", "venues"
+  add_foreign_key "my_events", "events"
+  add_foreign_key "my_events", "users"
   add_foreign_key "ticket_types", "events"
   add_foreign_key "venues", "regions"
 end

@@ -20,6 +20,12 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.create(event_params)
+    myeven = MyEvent.new
+    myeven.event = @event
+    myeven.user = current_user
+    myeven.save
+
+    redirect_to root_path
   end
 private
   def event_params

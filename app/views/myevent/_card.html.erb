@@ -1,0 +1,13 @@
+<div class="col-md-6">
+  <%= link_to myevent_detail_path(event) do %>
+    <div class="card">
+      <img class="card-img-top" src="<%= event.hero_image_url %>">
+      <div class="card-block">
+        <h4 class="card-title"><%= event.name %></h4>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
+        </p>
+        <a href=<%= myevent_edit_path(event.id) %> class="btn btn-warning" role="button">Edit</a>
+      </div>
+    </div>
+  <% end %>
+</div>  

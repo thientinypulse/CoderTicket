@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
+  get 'myevent/index'
+
+  get 'myevent/:id/edit' => 'myevent#edit', as: :myevent_edit
+  get 'myevent/:id/detail' => 'myevent#detail', as: :myevent_detail
+  put 'myevent/renovate'
   get 'venues/new'
 
   post 'venues/create'
+
+  post 'ticket_type/create' => 'ticket_type#create', as: :ticket_type_create
 
   devise_for :users
   root 'events#index'
