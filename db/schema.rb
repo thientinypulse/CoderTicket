@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151221213520) do
+ActiveRecord::Schema.define(version: 20151223010221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "book_tickets", force: :cascade do |t|
+    t.integer  "quantity"
+    t.integer  "ticket_type_id"
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "book_tickets", ["event_id"], name: "index_book_tickets_on_event_id", using: :btree
+  add_index "book_tickets", ["ticket_type_id"], name: "index_book_tickets_on_ticket_type_id", using: :btree
+  add_index "book_tickets", ["user_id"], name: "index_book_tickets_on_user_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -82,6 +95,9 @@ ActiveRecord::Schema.define(version: 20151221213520) do
 
   add_index "venues", ["region_id"], name: "index_venues_on_region_id", using: :btree
 
+  add_foreign_key "book_tickets", "events"
+  add_foreign_key "book_tickets", "ticket_types"
+  add_foreign_key "book_tickets", "users"
   add_foreign_key "events", "categories"
   add_foreign_key "events", "venues"
   add_foreign_key "ticket_types", "events"
