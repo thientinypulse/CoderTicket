@@ -15,7 +15,7 @@ class TicketsController < ApplicationController
       ticket_quantity_type_book = params['quantity_'+type.id.to_s]
       out_of_quantity << type.id if ticket_quantity_type_book.to_i > type.max_quantity
       puts ticket_quantity_type_book
-      tickets[type.id] = ticket_quantity_type_book
+      tickets[type.id] = ticket_quantity_type_book if ticket_quantity_type_book.to_i.between?(1,10)
     end
 
     if out_of_quantity.any?
@@ -28,6 +28,9 @@ class TicketsController < ApplicationController
       return
     end
 
+    @book_tickets = []
+    @total = 0
+
     tickets.each do |key, value|
       book_ticket = BookTicket.new
       book_ticket.event = @event
@@ -35,10 +38,18 @@ class TicketsController < ApplicationController
       book_ticket.quantity = value
       book_ticket.user = current_user
       book_ticket.save
+
+      @book_tickets << book_ticket
+      
+      ticket = TicketType.find(key)
+      @total += ticket.price * value.to_i
+
+      TicketType.update(key,:max_quantity =>  ticket.max_quantity - value.to_i)
     end
 
     puts tickets
 
-    redirect_to root_path
+    render "tickets/result"
+    # redirect_to root_path
   end
 end
