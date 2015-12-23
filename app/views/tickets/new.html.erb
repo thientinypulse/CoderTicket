@@ -17,10 +17,13 @@
       <div class="time-details"> 
         <%= @event.starts_at.strftime('%A, %d %b %Y %l:%M %p') %> 
       </div>
-
-
     </div>
   </div>
+
+  <%= form_tag('/tickets/book') do %>
+
+  <%= hidden_field_tag 'event_id', @event.id %>
+
   <div class="row">
     <div class="col-md-11 col-md-offset-1">  
       <table class="table">
@@ -32,7 +35,7 @@
         <tr>
           <td> <%= type.name %> </td>
           <td> <%= number_to_currency(type.price, unit: 'VND ', precision: 0) %> </td>
-          <td> <%= select_tag('quantity', options_for_select(0..10)) %></td> 
+          <td> <%= select_tag('quantity_' +type.id.to_s , options_for_select(0..10)) %></td>
         </tr>
         <% end %> 
       </table>
@@ -43,5 +46,6 @@
       <button class="btn btn-success btn-lg btn-block"> Buy </button>
     </div>
   <div>
-</div>  
+</div>
+ <% end %>
 
