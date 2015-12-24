@@ -19,7 +19,15 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.create(event_params)
+    @event = Event.new(event_params)
+
+    unless @event.valid?
+      render 'new'
+      return
+    end
+
+    @event.save
+
     myeven = MyEvent.new
     myeven.event = @event
     myeven.user = current_user

@@ -8,7 +8,10 @@
       <h1>Create new event</h1>
     </div>
 
+      <%= render partial: 'errors/message', locals: {errors: @event.errors}  if @event.errors.any?%>
+
 <%= form_for(@event, url: events_path) do |f| %>
+
 
 <%= f.label :starts_at %><br/>
 <%= f.datetime_local_field(:starts_at, min: Date.today) %><br/>

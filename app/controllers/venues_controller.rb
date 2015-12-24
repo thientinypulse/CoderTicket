@@ -4,7 +4,14 @@ class VenuesController < ApplicationController
   end
 
   def create
-  	@venue = Venue.create(venue_params)
+  	@venue = Venue.new(venue_params)
+
+    unless @venue.valid?
+      render 'new'
+      return
+    end
+
+    @venue.save
 
   end
 
