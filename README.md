@@ -57,7 +57,7 @@ The following **required** functionality is complete:
 
 Here's a walkthrough of implemented user stories:
 
-![VideoWalkthrough](http://i.imgur.com/BlbGRJW.gif)
+![VideoWalkthrough](http://i.imgur.com/ko1c1UU.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
