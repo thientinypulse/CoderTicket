@@ -59,7 +59,7 @@ Here's a walkthrough of implemented user stories:
 
 http://i.imgur.com/ko1c1UU.gif
 
-[VideoWalkthrough](http://i.imgur.com/ko1c1UU.gif)
+![Videowalkthrough](http://i.imgur.com/ko1c1UU.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
